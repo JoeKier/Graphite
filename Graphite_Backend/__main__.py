@@ -1,19 +1,7 @@
 import pandas as pd
 import uvicorn
-from fastapi import FastAPI
 from typing import List
 from starlette.middleware.cors import CORSMiddleware
-
-# Create FastAPI App --
-App = FastAPI()
-
-App.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],  # Allows all origins
-    allow_credentials=True,
-    allow_methods=["*"],  # Allows all methods (GET, POST, etc.)
-    allow_headers=["*"],  # Allows all headers
-)
 
 # FastAPI route to fetch the processed data
 @App.get("/process_data")
