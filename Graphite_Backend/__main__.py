@@ -4,7 +4,7 @@ from typing import List
 from starlette.middleware.cors import CORSMiddleware
 
 # FastAPI route to fetch the processed data
-@App.get("/process_data")
+App.get("/process_data")
 def get_processed_data():
 
     df = pd.read_csv("D:\Documents\Analiza\Trening\Dane\Sleep.csv")
