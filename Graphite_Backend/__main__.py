@@ -30,8 +30,19 @@ def get_processed_data():
         "/", expand=True
     )
     df_num = df_num.drop(columns=["Occupation", "Person ID", "Blood Pressure"])
+    df_ss = df_num.groupby(['Sleep Duration', 'Stress Level']).size().reset_index(name='Occurrences')
 
-    return {"data": list(zip(df_num["Stress Level"].tolist(), df_num["Sleep Duration"].tolist())), "histogram": 0}
+    return {
+        "data": {
+            "sleep_stress": {
+                "stress": df_ss['Stress Level'],
+                "sleep": df_ss['Sleep Duration'],
+                "occurrences": df_ss['Occurrences'],
+            } 
+
+        }
+    }
+    #return {"data": list(zip(df_num["Stress Level"].tolist(), df_num["Sleep Duration"].tolist())), "histogram": 0}
 
 
 if __name__ == "__main__":
