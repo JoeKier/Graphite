@@ -1,2 +1,6 @@
-Django==3.2
+Django
 djangorestframework
+gunicorn
+uvicorn
+django-cors-headers
+psycopg2-binary  # Required if using PostgreSQL
