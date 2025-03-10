@@ -3,4 +3,5 @@ djangorestframework
 gunicorn
 uvicorn
 django-cors-headers
+pandas
 psycopg2-binary  # Required if using PostgreSQL
