@@ -19,6 +19,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy project files
 COPY . .
 
+# Copy Gunicorn config
+COPY gunicorn.conf.py .
+
 # Expose port
 EXPOSE 8000
 
