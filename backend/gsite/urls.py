@@ -16,10 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
-from gsite.processed_data.views import get_processed_data
+from processed_data.views import process_data_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('processed_data/', get_processed_data),
+    path("processed_data/", process_data_view, name="process_data"),
 ]

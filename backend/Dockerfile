@@ -19,6 +19,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy project files
 COPY . .
 
+#Copy data files
+COPY gsite/data/Sleep.csv /app/gsite/data/Sleep.csv
+
 # Copy Gunicorn config
 COPY gunicorn.conf.py .
 
