@@ -12,26 +12,25 @@ def process_data_view(request):
         return JsonResponse({"error": "Sleep.csv file not found"}, status=404)
 
     # Read the CSV file
-    # with open(csv_path, "r") as file:
-    #     data = file.readlines()  # Reads all lines
 
     df = pd.read_csv(csv_path)
-
+    df_num = df.fillna(0)    
     df_ss = (
-        df.groupby(["Sleep Duration", "Stress Level"])
+        df_num.groupby(["Sleep Duration", "Stress Level"])
         .size()
         .reset_index(name="Occurrences")
     )
 
-    df_dic = df_ss.to_dict()
+    #df_ss = df_ss.applymap(lambda x: x if isinstance(x, (int, float)) else None)
 
-    return JsonResponse({
-            df_dic
-            # "data": {
-            #     "sleep_stress": {
-            #         "stress": df_ss["Stress Level"],
-            #         "sleep": df_ss["Sleep Duration"],
-            #         "occurrences": df_ss["Occurrences"],
-            #     }
-            # }
-        })  # Return dictionary
+    data = {
+        "data": {
+            "sleep_stress": {
+                "stress": df_ss["Stress Level"].tolist(),
+                "sleep": df_ss["Sleep Duration"].tolist(),
+                "occurrences": df_ss["Occurrences"].tolist(),
+            }
+        }
+    }
+
+    return JsonResponse(data)  # Return dictionary
