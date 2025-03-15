@@ -5,7 +5,7 @@ import pandas as pd
 
 def process_data_view(request):
     # Define the absolute path to the CSV file
-    csv_path = os.path.join(settings.BASE_DIR, "gsite", "data", "Sleep.csv")
+    csv_path = os.path.join(settings.BASE_DIR, "gsite", "processed_data", "data", "Sleep.csv")
 
     # Check if the file exists before opening it
     if not os.path.exists(csv_path):
@@ -23,12 +23,15 @@ def process_data_view(request):
         .reset_index(name="Occurrences")
     )
 
+    df_dic = df_ss.to_dict()
+
     return JsonResponse({
-            "data": {
-                "sleep_stress": {
-                    "stress": df_ss["Stress Level"],
-                    "sleep": df_ss["Sleep Duration"],
-                    "occurrences": df_ss["Occurrences"],
-                }
-            }
+            df_dic
+            # "data": {
+            #     "sleep_stress": {
+            #         "stress": df_ss["Stress Level"],
+            #         "sleep": df_ss["Sleep Duration"],
+            #         "occurrences": df_ss["Occurrences"],
+            #     }
+            # }
         })  # Return dictionary
