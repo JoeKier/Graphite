@@ -16,3 +16,5 @@ W Tests tworzę testy
     barSize={40} 
     name="Sleep Duration"
 />
+
+react Carousel

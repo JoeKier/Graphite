@@ -34,7 +34,7 @@ const App = () => {
                     <Tooltip />
                     <Bar 
                         dataKey="sleep" 
-                        fill="#8884d8" 
+                        fill={({ occurrences }) => `rgba(136, 132, 216, ${Math.min(occurrences / 10, 1)})`}
                         barSize={40} 
                         name="Sleep Duration"
                     />
