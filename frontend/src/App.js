@@ -61,14 +61,22 @@ const App = () => {
           </YAxis>
           <Tooltip />
           <Bar dataKey="sleep" barSize={40} name="Sleep Duration" fill="blue">
-            {chartData.map((entry, index) => (
-              <Cell
-                key={`cell-${index}`}
-                fill={`rgba(136, 132, 216, ${Math.min(
-                  entry.occurrences / 10, 1
-                )})`}
-              />
-            ))}
+            {chartData.map((entry, index) => {
+              const minColor = [50, 50, 150]; // Dark blue (low occurrences)
+              const maxColor = [180, 180, 255]; // Bright blue (high occurrences)
+              const factor = Math.min(entry.occurrences / 10, 1); // Scale between 0 and 1
+
+              const interpolatedColor = minColor.map((min, i) =>
+                Math.round(min + factor * (maxColor[i] - min))
+              );
+
+              return (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={`rgb(${interpolatedColor.join(",")})`} // No transparency
+                />
+              );
+            })}
           </Bar>
         </BarChart>
       </ResponsiveContainer>
