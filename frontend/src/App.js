@@ -68,7 +68,7 @@ const App = () => {
         height: "100vh", // Full viewport height
       }}>
       <div style={{ width: "70%", height: "500px" }}>
-      <h2>Correlation between Sleep Duration and Stress Levels</h2>
+      <h2 style={{ textAlign: "center" }}>Correlation between Sleep Duration and Stress Levels</h2>
       <ResponsiveContainer width="60%" height="100%">
         <BarChart data={chartData} layout="horizontal">
           <CartesianGrid strokeDasharray="3 3" />
