@@ -76,10 +76,10 @@ const App = () => {
       </h2>
       <div
         style={{
-          // width: "100vw", // Control width
-          // height: "60vh", // Control height
+          width: "100vw", // Control width
+          height: "60vh", // Control height
           display: "flex",
-          // justifyContent: "center",
+          justifyContent: "center",
           alignItems: "center",
           margin: "auto", // Ensure centering
           backgroundColor: "#f9f9f9", // Just for visualization
