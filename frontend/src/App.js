@@ -76,7 +76,7 @@ const App = () => {
       </h2>
       <div
         style={{
-          width: "80vw", // Control width
+          width: "100vw", // Control width
           height: "60vh", // Control height
           display: "flex",
           justifyContent: "center",
