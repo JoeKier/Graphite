@@ -62,13 +62,12 @@ const App = () => {
   return (
     <div
       style={{
-        width: "80%",
-        height: "400px",
-        textAlign: "center",
-        marginTop: "50px",
-        marginLeft: "100px",
-      }}
-    >
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh", // Full viewport height
+      }}>
+      <div style={{ width: "70%", height: "500px" }}>
       <h2>Correlation between Sleep Duration and Stress Levels</h2>
       <ResponsiveContainer width="60%" height="100%">
         <BarChart data={chartData} layout="horizontal">
@@ -105,6 +104,7 @@ const App = () => {
           </Bar>
         </BarChart>
       </ResponsiveContainer>
+      </div>
     </div>
   );
 };
