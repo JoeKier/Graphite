@@ -64,9 +64,11 @@ const App = () => {
       style={{
         display: "flex",
         flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
+        justifyContent: "center", // Centers vertically
+        alignItems: "center", // Centers horizontally
         height: "100vh", // Full viewport height
+        width: "100vw", // Full viewport width
+        textAlign: "center", // Ensures text is centered
       }}
     >
       <h2 style={{ textAlign: "center" }}>
@@ -74,51 +76,48 @@ const App = () => {
       </h2>
       <div
         style={{
-          width: "70%",
-          height: "500px",
+          width: "80%",
+          height: "60vh", // Adjust this if necessary
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          margin: "auto", // Ensures horizontal centering
         }}
       >
-        <div style={{ width: "100%", height: "100%" }}>
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={chartData} layout="horizontal">
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="stress" type="category">
-                <Label value="Stress Level" position="bottom" />
-              </XAxis>
-              <YAxis dataKey="sleep" type="number">
-                <Label
-                  value="Sleep Duration [hours]"
-                  position="left"
-                  angle={-90}
-                  style={{ textAnchor: "middle" }}
-                />
-              </YAxis>
-              <Tooltip content={<CustomTooltip />} />
-              <Bar dataKey="sleep" barSize={40} name="Sleep Duration" fill="blue">
-                {chartData.map((entry, index) => {
-                  const minColor = [50, 50, 150]; // Dark blue
-                  const maxColor = [180, 180, 255]; // Bright blue
-                  const factor = Math.min(entry.occurrences / 10, 1); // Scale between 0 and 1
+        <ResponsiveContainer width="100%" height="100%">
+          <BarChart data={chartData} layout="horizontal">
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="stress" type="category">
+              <Label value="Stress Level" position="bottom" />
+            </XAxis>
+            <YAxis dataKey="sleep" type="number">
+              <Label
+                value="Sleep Duration [hours]"
+                position="left"
+                angle={-90}
+                style={{ textAnchor: "middle" }}
+              />
+            </YAxis>
+            <Tooltip content={<CustomTooltip />} />
+            <Bar dataKey="sleep" barSize={40} name="Sleep Duration" fill="blue">
+              {chartData.map((entry, index) => {
+                const minColor = [50, 50, 150]; // Dark blue
+                const maxColor = [180, 180, 255]; // Bright blue
+                const factor = Math.min(entry.occurrences / 10, 1); // Scale between 0 and 1
 
-                  const interpolatedColor = minColor.map((min, i) =>
-                    Math.round(min + factor * (maxColor[i] - min))
-                  );
+                const interpolatedColor = minColor.map((min, i) =>
+                  Math.round(min + factor * (maxColor[i] - min))
+                );
 
-                  return (
-                    <Cell
-                      key={`cell-${index}`}
-                      fill={`rgb(${interpolatedColor.join(",")})`} // No transparency
-                    />
-                  );
-                })}
-              </Bar>
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
+                return (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={`rgb(${interpolatedColor.join(",")})`} // No transparency
+                  />
+                );
+              })}
+            </Bar>
+          </BarChart>
+        </ResponsiveContainer>
       </div>
     </div>
   );
