@@ -76,15 +76,15 @@ const App = () => {
       </h2>
       <div
         style={{
-          width: "100vw", // Control width
-          height: "60vh", // Control height
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          margin: "auto", // Ensure centering
-          backgroundColor: "#f9f9f9", // Just for visualization
-          padding: "20px",
-          borderRadius: "10px",
+          // width: "100vw", // Control width
+          // height: "60vh", // Control height
+          // display: "flex",
+          // justifyContent: "center",
+          // alignItems: "center",
+          // margin: "auto", // Ensure centering
+          // backgroundColor: "#f9f9f9", // Just for visualization
+          // padding: "20px",
+          // borderRadius: "10px",
         }}
       >
         <ResponsiveContainer width="100%" height="100%">
