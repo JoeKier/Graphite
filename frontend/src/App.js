@@ -75,12 +75,15 @@ const App = () => {
         Correlation between Sleep Duration and Stress Levels
       </h2>
       <div
-        style={{
-          width: "80%",
-          height: "60vh", // Adjust this if necessary
+         style={{
+          width: "80vw", // Take 80% of viewport width
+          height: "60vh", // Take 60% of viewport height
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          backgroundColor: "#f9f9f9", // Just to visualize spacing (can be removed)
+          padding: "20px",
+          borderRadius: "10px",
         }}
       >
         <ResponsiveContainer width="100%" height="100%">
