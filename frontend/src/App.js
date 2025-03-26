@@ -12,6 +12,31 @@ import {
   Cell,
 } from "recharts";
 
+const CustomTooltip = ({ active, payload }) => {
+  if (active && payload && payload.length) {
+    return (
+      <div
+        style={{
+          backgroundColor: "white",
+          padding: "10px",
+          border: "1px solid #ccc",
+        }}
+      >
+        <p>
+          <strong>Stress Level:</strong> {payload[0].payload.stress}
+        </p>
+        <p>
+          <strong>Sleep Duration:</strong> {payload[0].payload.sleep} hours
+        </p>
+        <p>
+          <strong>Occurrences:</strong> {payload[0].payload.occurrences}
+        </p>
+      </div>
+    );
+  }
+  return null;
+};
+
 const App = () => {
   const [chartData, setChartData] = useState([]);
 
@@ -59,7 +84,7 @@ const App = () => {
               style={{ textAnchor: "middle" }}
             />
           </YAxis>
-          <Tooltip />
+          <Tooltip content={<CustomTooltip />} />
           <Bar dataKey="sleep" barSize={40} name="Sleep Duration" fill="blue">
             {chartData.map((entry, index) => {
               const minColor = [50, 50, 150]; // Dark blue (low occurrences)
