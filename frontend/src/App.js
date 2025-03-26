@@ -75,19 +75,24 @@ const App = () => {
         Correlation between Sleep Duration and Stress Levels
       </h2>
       <div
-         style={{
-          width: "80vw", // Take 80% of viewport width
-          height: "60vh", // Take 60% of viewport height
+        style={{
+          width: "80vw", // Control width
+          height: "60vh", // Control height
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          backgroundColor: "#f9f9f9", // Just to visualize spacing (can be removed)
+          margin: "auto", // Ensure centering
+          backgroundColor: "#f9f9f9", // Just for visualization
           padding: "20px",
           borderRadius: "10px",
         }}
       >
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={chartData} layout="horizontal">
+          <BarChart
+            data={chartData}
+            layout="horizontal"
+            margin={{ top: 20, right: 30, left: 30, bottom: 20 }}
+          >
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="stress" type="category">
               <Label value="Stress Level" position="bottom" />
