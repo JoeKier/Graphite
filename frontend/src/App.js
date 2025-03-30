@@ -48,11 +48,11 @@ const App = () => {
         const { stress, sleep, occurrences } = response.data.data.sleep_stress;
 
         const formattedData = stress.map((stressLevel, index) => ({
-          stress: `Level ${stressLevel}`,
+          stress: stressLevel,
           sleep: sleep[index],
           occurrences: occurrences[index],
         }));
-        console.log("Formatted Data for a Grouped Histogram:", formattedData);
+        console.log("Formatted Data for Chart:", formattedData);
 
         setChartData(formattedData);
       })
