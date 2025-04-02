@@ -47,12 +47,30 @@ const App = () => {
         console.log("Fetched Data:", response.data);
         const { stress, sleep, occurrences } = response.data.data.sleep_stress;
 
-        const formattedData = stress.map((stressLevel, index) => ({
-          stress: stressLevel,
-          sleep: sleep[index],
-          occurrences: occurrences[index],
-        }));
-        console.log("Formatted Data for Chart:", formattedData);
+        // const formattedData = stress.map((stressLevel, index) => ({
+        //   stress: stressLevel,
+        //   sleep: sleep[index],
+        //   occurrences: occurrences[index],
+        // }));
+        // console.log("Formatted Data for Chart:", formattedData);
+
+        // Group data by stress level
+        const groupedData = {};
+
+        stress.forEach((stressLevel, index) => {
+          if (!groupedData[stressLevel]) {
+            groupedData[stressLevel] = [];
+          }
+          groupedData[stressLevel].push({
+            stress: `Level ${stressLevel}`,
+            sleep: sleep[index],
+            occurrences: occurrences[index],
+          });
+        });
+
+        // Flatten grouped data into array
+        const formattedData = Object.values(groupedData).flat();
+        console.log("Formatted Data for Grouped Histogram:", formattedData);
 
         setChartData(formattedData);
       })
