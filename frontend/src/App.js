@@ -47,13 +47,6 @@ const App = () => {
         console.log("Fetched Data:", response.data);
         const { stress, sleep, occurrences } = response.data.data.sleep_stress;
 
-        // const formattedData = stress.map((stressLevel, index) => ({
-        //   stress: stressLevel,
-        //   sleep: sleep[index],
-        //   occurrences: occurrences[index],
-        // }));
-        // console.log("Formatted Data for Chart:", formattedData);
-
         // Group data by stress level
         const groupedData = {};
 
@@ -77,6 +70,16 @@ const App = () => {
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
 
+  // Function to determine color based on stress level
+  const getBaseColor = (stressLevel) => {
+    if (stressLevel <= 3) return [0, 105, 205]; // Blue [0, 155, 255]
+    if (stressLevel <= 4) return [100, 205, 0]; // Green
+    if (stressLevel <= 5) return [255, 205, 50]; // Yellow
+    if (stressLevel <= 6) return [230, 125, 50]; // Orange
+    if (stressLevel <= 7) return [210, 50, 50]; // Red
+    return [205, 0, 105]; // Purple [0, 0, 255]
+  };
+
   return (
     <div
       style={{
@@ -87,20 +90,28 @@ const App = () => {
         height: "100vh", // Full viewport height
         width: "100vw", // Full viewport width
         textAlign: "center", // Ensures text is centered
+        backgroundColor: "#4E82AF",
       }}
     >
-      <h2 style={{ textAlign: "center" }}>
+      <h2
+        style={{
+          textAlign: "center",
+          backgroundColor: "#D3E9F5",
+          padding: "10px",
+          borderRadius: "5px",
+        }}
+      >
         Correlation between Sleep Duration and Stress Levels
       </h2>
       <div
         style={{
-          width: "80vw", // Control width
-          height: "60vh", // Control height
+          width: "80vw",
+          height: "60vh",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           margin: "auto", // Ensure centering
-          backgroundColor: "#f9f9f9", // Just for visualization
+          backgroundColor: "#ECF1F3",
           padding: "20px",
           borderRadius: "10px",
         }}
@@ -112,7 +123,16 @@ const App = () => {
             margin={{ top: 20, right: 30, left: 30, bottom: 20 }}
           >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="stress" type="category">
+            <XAxis
+              dataKey="stress"
+              type="category"
+              tickFormatter={(value, index) => {
+                // Only display the label for the first occurrence of each stress level
+                return index === 0 || chartData[index - 1].stress !== value
+                  ? value
+                  : "";
+              }}
+            >
               <Label value="Stress Level" position="bottom" />
             </XAxis>
             <YAxis dataKey="sleep" type="number">
@@ -126,18 +146,15 @@ const App = () => {
             <Tooltip content={<CustomTooltip />} />
             <Bar dataKey="sleep" barSize={40} name="Sleep Duration" fill="blue">
               {chartData.map((entry, index) => {
-                const minColor = [50, 50, 150]; // Dark blue
-                const maxColor = [180, 180, 255]; // Bright blue
-                const factor = Math.min(entry.occurrences / 10, 1); // Scale between 0 and 1
-
-                const interpolatedColor = minColor.map((min, i) =>
-                  Math.round(min + factor * (maxColor[i] - min))
+                const baseColor = getBaseColor(entry.stress);
+                const brightnessFactor = Math.min(entry.occurrences / 20, 1);
+                const adjustedColor = baseColor.map((color) =>
+                  Math.round(color + (255 - color) * (1 - Math.max(brightnessFactor, 0.25)))
                 );
-
                 return (
                   <Cell
                     key={`cell-${index}`}
-                    fill={`rgb(${interpolatedColor.join(",")})`} // No transparency
+                    fill={`rgb(${adjustedColor.join(",")})`}
                   />
                 );
               })}
