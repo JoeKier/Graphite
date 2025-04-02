@@ -62,7 +62,7 @@ const App = () => {
             groupedData[stressLevel] = [];
           }
           groupedData[stressLevel].push({
-            stress: `Level ${stressLevel}`,
+            stress: stressLevel,
             sleep: sleep[index],
             occurrences: occurrences[index],
           });
