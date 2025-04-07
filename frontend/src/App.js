@@ -19,7 +19,9 @@ const CustomTooltip = ({ active, payload }) => {
         style={{
           backgroundColor: "white",
           padding: "10px",
-          border: "1px solid #ccc",
+          border: "2px solid #ccc",
+          borderRadius: "5px",
+          textAlign: "left",
         }}
       >
         <p>
@@ -72,12 +74,12 @@ const App = () => {
 
   // Function to determine color based on stress level
   const getBaseColor = (stressLevel) => {
-    if (stressLevel <= 3) return [0, 105, 205]; // Blue [0, 155, 255]
-    if (stressLevel <= 4) return [100, 205, 0]; // Green
-    if (stressLevel <= 5) return [255, 205, 50]; // Yellow
-    if (stressLevel <= 6) return [230, 125, 50]; // Orange
-    if (stressLevel <= 7) return [210, 50, 50]; // Red
-    return [205, 0, 105]; // Purple [0, 0, 255]
+    if (stressLevel <= 3) return [0, 200, 255]; // Blue  [0, 105, 205]
+    if (stressLevel <= 4) return [0, 155, 255]; // Green [100, 205, 0]
+    if (stressLevel <= 5) return [0, 95, 255]; // Yellow [255, 205, 50]
+    if (stressLevel <= 6) return [0, 55, 255]; // Orange [230, 125, 50]
+    if (stressLevel <= 7) return [0, 35, 200]; // Red [210, 50, 50]
+    return [0, 5, 155]; // Purple  [205, 0, 105]
   };
 
   return (
