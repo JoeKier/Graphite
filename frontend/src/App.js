@@ -41,6 +41,9 @@ const CustomTooltip = ({ active, payload }) => {
 
 const App = () => {
   const [chartData, setChartData] = useState([]);
+  const [showInfo, setShowInfo] = useState(false);
+  
+
 
   useEffect(() => {
     axios
@@ -92,15 +95,17 @@ const App = () => {
         height: "100vh", // Full viewport height
         width: "100vw", // Full viewport width
         textAlign: "center", // Ensures text is centered
-        backgroundColor: "#4E82AF",
+        backgroundColor: "#94AFC6",
       }}
     >
       <h2
         style={{
           textAlign: "center",
-          backgroundColor: "#D3E9F5",
+          backgroundColor: "#ECF1F3",
           padding: "10px",
           borderRadius: "5px",
+          fontFamily: "'Helvetica', sans-serif",
+          color: "#1E466E"
         }}
       >
         Correlation between Sleep Duration and Stress Levels
@@ -108,7 +113,7 @@ const App = () => {
       <div
         style={{
           width: "80vw",
-          height: "40vh",
+          height: "60vh",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -164,21 +169,51 @@ const App = () => {
           </BarChart>
         </ResponsiveContainer>
       </div>
-      <div
+      <button
+        onClick={() => setShowInfo((prev) => !prev)}
         style={{
           marginTop: "20px",
-          width: "80%",
-          padding: "15px",
-          backgroundColor: "#f1f1f1",
-          borderRadius: "8px",
-          fontSize: "0.95rem",
-          lineHeight: "1.6",
-          color: "#333",
-          textAlign: "left",
+          padding: "10px 20px",
+          backgroundColor: "#007bff",
+          color: "white",
+          border: "none",
+          borderRadius: "5px",
+          cursor: "pointer",
+          fontSize: "1rem",
         }}
       >
-        
-      </div>
+        {showInfo ? "Hide Info" : "Show Info"}
+      </button>
+
+      {showInfo && (
+        <div
+          style={{
+            marginTop: "10px",
+            width: "80%",
+            padding: "15px",
+            backgroundColor: "#f8f9fa",
+            borderRadius: "8px",
+            fontSize: "0.95rem",
+            lineHeight: "1.6",
+            color: "#333",
+            textAlign: "left",
+            boxShadow: "0 2px 6px rgba(0, 0, 0, 0.1)",
+          }}
+        >
+          <p>
+            <strong>Data Source:</strong> Laksika Tharmalingam 'Sleep Health and Lifestyle Dataset', Kaggle.com
+          </p>
+          <p>
+            <strong>Insight:</strong> Each bar shows the sleep duration for a given stress level.
+            The color hue corresponds to the stress level, while its brightness scales with observation frequency.
+
+            It is noticeable how higher stress levels correspond to shorter sleep.
+            Not resting adequately may push us further on edge,
+            while anxiety also makes it harder to fall asleep.
+            Truly a vicious circle.
+          </p>
+        </div>
+      )}
     </div>
   );
 };
