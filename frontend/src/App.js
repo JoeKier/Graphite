@@ -108,7 +108,7 @@ const App = () => {
       <div
         style={{
           width: "80vw",
-          height: "60vh",
+          height: "40vh",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -163,6 +163,21 @@ const App = () => {
             </Bar>
           </BarChart>
         </ResponsiveContainer>
+      </div>
+      <div
+        style={{
+          marginTop: "20px",
+          width: "80%",
+          padding: "15px",
+          backgroundColor: "#f1f1f1",
+          borderRadius: "8px",
+          fontSize: "0.95rem",
+          lineHeight: "1.6",
+          color: "#333",
+          textAlign: "left",
+        }}
+      >
+        
       </div>
     </div>
   );
