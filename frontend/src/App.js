@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   BarChart,
   Bar,
@@ -180,14 +181,32 @@ const App = () => {
           borderRadius: "5px",
           cursor: "pointer",
           fontSize: "1rem",
+          display: "flex",
+          alignItems: "center",
+          gap: "10px",
         }}
       >
-        {showInfo ? "Hide Info" : "Show Info"}
+        <span>{showInfo ? "Hide Info" : "Show Info"}</span>
+        <motion.span
+          initial={{ rotate: 0 }}
+          animate={{ rotate: showInfo ? 180 : 0 }}
+          transition={{ duration: 0.3 }}
+          style={{ display: "inline-block" }}
+        >
+          ℹ️
+        </motion.span>
       </button>
 
-      {showInfo && (
-        <div
+      <AnimatePresence>
+        {showInfo && (
+          <motion.div
+          key="info-box"
+          initial={{ opacity: 0, y: -20, height: 0 }}
+          animate={{ opacity: 1, y: 0, height: "auto" }}
+          exit={{ opacity: 0, y: -20, height: 0 }}
+          transition={{ duration: 0.4, ease: "easeInOut" }}
           style={{
+            overflow: "hidden",
             marginTop: "10px",
             width: "80%",
             padding: "15px",
@@ -198,22 +217,23 @@ const App = () => {
             color: "#333",
             textAlign: "left",
             boxShadow: "0 2px 6px rgba(0, 0, 0, 0.1)",
-          }}
-        >
-          <p>
-            <strong>Data Source:</strong> Laksika Tharmalingam 'Sleep Health and Lifestyle Dataset', Kaggle.com
-          </p>
-          <p>
-            <strong>Insight:</strong> Each bar shows the sleep duration for a given stress level.
-            The color hue corresponds to the stress level, while its brightness scales with observation frequency.
+            }}
+          >
+            <p>
+              <strong>Data Source:</strong> Laksika Tharmalingam 'Sleep Health and Lifestyle Dataset', Kaggle.com
+            </p>
+            <p>
+              <strong>Insight:</strong> Each bar shows the sleep duration for a given stress level.
+              The color hue corresponds to the stress level, while its brightness scales with observation frequency.
 
-            It is noticeable how higher stress levels correspond to shorter sleep.
-            Not resting adequately may push us further on edge,
-            while anxiety also makes it harder to fall asleep.
-            Truly a vicious circle.
-          </p>
-        </div>
-      )}
+              It is noticeable how higher stress levels correspond to shorter sleep.
+              Not resting adequately may push us further on edge,
+              while anxiety also makes it harder to fall asleep.
+              Truly a vicious circle.
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

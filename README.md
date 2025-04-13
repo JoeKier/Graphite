@@ -10,6 +10,6 @@ W Views.py tworzę widoki do wyświetlania albo edycji danych (crud)
 W Tests tworzę testy
 
 
-
+docker-compose down --volumes --remove-orphans; docker-compose up --build -d
 
 react Carousel
