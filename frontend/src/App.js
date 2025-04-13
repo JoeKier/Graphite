@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
+import { X, Info } from "lucide-react";
 import {
   BarChart,
   Bar,
@@ -170,12 +171,14 @@ const App = () => {
           </BarChart>
         </ResponsiveContainer>
       </div>
-      <button
+      {/* <button
         onClick={() => setShowInfo((prev) => !prev)}
         style={{
           marginTop: "20px",
+          marginBottom: "5px",
+          marginLeft: "10px",
           padding: "10px 20px",
-          backgroundColor: "#007bff",
+          backgroundColor: "#308FEE",
           color: "white",
           border: "none",
           borderRadius: "5px",
@@ -195,7 +198,7 @@ const App = () => {
         >
           ℹ️
         </motion.span>
-      </button>
+      </button> */}
 
       <AnimatePresence>
         {showInfo && (
@@ -208,6 +211,7 @@ const App = () => {
           style={{
             overflow: "hidden",
             marginTop: "10px",
+            marginBottom: "10px", 
             width: "80%",
             padding: "15px",
             backgroundColor: "#f8f9fa",
@@ -219,12 +223,24 @@ const App = () => {
             boxShadow: "0 2px 6px rgba(0, 0, 0, 0.1)",
             }}
           >
+           <button
+              onClick={() => setShowInfo(false)}
+              style={{
+                backgroundColor: "transparent",
+                border: "none",
+                cursor: "pointer",
+                padding: "4px",
+              }}
+              aria-label="Close"
+            >
+              <X size={20} />
+            </button>
             <p>
               <strong>Data Source:</strong> Laksika Tharmalingam 'Sleep Health and Lifestyle Dataset', Kaggle.com
             </p>
             <p>
               <strong>Insight:</strong> Each bar shows the sleep duration for a given stress level.
-              The color hue corresponds to the stress level, while its brightness scales with observation frequency.
+              The color hue corresponds to the stress level, while its brightness scales with observation frequency. <br />
 
               It is noticeable how higher stress levels correspond to shorter sleep.
               Not resting adequately may push us further on edge,
@@ -233,6 +249,26 @@ const App = () => {
             </p>
           </motion.div>
         )}
+        {!showInfo && (
+            <button
+              onClick={() => setShowInfo(true)}
+              style={{
+                position: "fixed",
+                bottom: "20px",
+                left: "20px",
+                backgroundColor: "#007BFF",
+                color: "white",
+                border: "none",
+                borderRadius: "4px",
+                padding: "8px 14px",
+                cursor: "pointer",
+                boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
+                zIndex: 1000,
+              }}
+            >
+              <Info size={30} />
+            </button>
+          )}
       </AnimatePresence>
     </div>
   );
