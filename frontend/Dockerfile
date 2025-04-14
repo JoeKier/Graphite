@@ -4,18 +4,23 @@ FROM node:16
 # Set working directory
 WORKDIR /app
 
-# # Install dependencies
-# COPY package.json package-lock.json /app/
-# RUN npm install
+# Copy package.json and package-lock.json first for caching
+COPY package*.json ./
 
-# Copy the rest of the application
-COPY . /app/
+# Install dependencies
+RUN npm install
 
-# # Build the React app
-# RUN npm run build
+# Copy the rest of the app
+COPY . .
 
-# Expose the port React app will run on
+# Build the React app
+RUN npm run build
+
+# Install serve globally to serve the build folder
+RUN npm install -g serve
+
+# Expose the port
 EXPOSE 3000
 
-# Start the React app
-CMD ["serve", "-s", "build"]
+# Start the built app using serve
+CMD ["serve", "-s", "build", "-l", "3000"]
